@@ -33,9 +33,6 @@
             <router-link :to="{name:'SignUp'}" class="button is-primary">
               <strong>Sign up</strong>
             </router-link>
-            <a class="button is-light">
-              Log in
-            </a>
           </div>
         </div>
       </div>

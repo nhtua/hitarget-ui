@@ -5,10 +5,10 @@
     </div>
     <div class="container">
       <h1 class="title">
-        {{ msg }}
+        Keep up your good progress
       </h1>
       <p class="subtitle">
-        My first website with <strong>Bulma</strong>!
+        until reaching the goal by <strong>tracking</strong> the time you spent on
       </p>
     </div>
   </section>
