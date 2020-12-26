@@ -30,9 +30,9 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-primary">
+            <router-link :to="{name:'SignUp'}" class="button is-primary">
               <strong>Sign up</strong>
-            </a>
+            </router-link>
             <a class="button is-light">
               Log in
             </a>

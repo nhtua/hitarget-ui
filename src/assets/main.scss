@@ -1,13 +1,18 @@
-// Customizations Here (Optional)
-
 // Bulma Import
 @import '~bulma';
 
 // Google Fonts import
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;400;600&display=swap');
 
-// Common style
 
+// Customizations Here (Optional)
+/* Color Theme Swatches in Hex */
+$primary: #10C78E;
+$info: #6CFBF6;
+$warning: #FA932D;
+$danger: #FA6963;
+
+// Common style
 body {
   margin: 0;
   font-family: 'Dosis', sans-serif;
