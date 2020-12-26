@@ -2,3 +2,13 @@
 
 // Bulma Import
 @import '~bulma';
+
+// Google Fonts import
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;400;600&display=swap');
+
+// Common style
+
+body {
+  margin: 0;
+  font-family: 'Dosis', sans-serif;
+}

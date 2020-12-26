@@ -1,6 +1,9 @@
 <template>
   <section class="section">
     <div class="container">
+      <img alt="Vue logo" src="@/assets/hitarget-logo.png" width="260">
+    </div>
+    <div class="container">
       <h1 class="title">
         {{ msg }}
       </h1>
@@ -13,27 +16,12 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
+  name: 'Home',
+  components: {},
+  data () {
+    return {
+      msg: "HiTarget"
+    }
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
