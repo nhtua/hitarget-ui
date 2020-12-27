@@ -23,6 +23,11 @@ export default {
       require: false,
       default: 'Email'
     },
+    withValidation: {
+      type: Boolean,
+      default: true,
+      require: false
+    },
     modelValue: {
       type: String,
       require: true,
@@ -44,8 +49,10 @@ export default {
   },
   methods: {
     validate(e) {
-      //just update value to trigger computed function isValid()
-      this.v_email = e.target.value;
+      if (this.withValidation) {        
+        //just update value to trigger computed function isValid()
+        this.v_email = e.target.value;
+      }
       this.$emit('update:modelValue', e.target.value)
     }
   }

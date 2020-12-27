@@ -17,8 +17,8 @@
         </div>
         <div class="column is-one-thirds" id="loginForm">
           <form @submit.prevent="onSubmit">
-            <FieldEmail v-model="user.email"></FieldEmail>
-            <FieldPassword v-model="user.password"></FieldPassword>
+            <FieldEmail v-model="user.email" :withValidation="false"></FieldEmail>
+            <FieldPassword v-model="user.password" :withValidation="false"></FieldPassword>
             <div class="field">
               <p class="control">
                 <button class="button is-primary">

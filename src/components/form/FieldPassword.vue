@@ -30,6 +30,11 @@ export default {
       default: false,
       require: false
     },
+    withValidation: {
+      type: Boolean,
+      default: true,
+      require: false
+    },
     modelValue: {
       type: String,
       default: "",
@@ -62,9 +67,11 @@ export default {
   },
   methods: {
     validate(e) {
-      //just update value, computed function auto validate the input
-      this.v_password = e.target.value;
-      this.v_confirmedPassword = this.confirmedPassword;
+      if (this.withValidation) {
+        //just update value, computed function auto validate the input
+        this.v_password = e.target.value;
+        this.v_confirmedPassword = this.confirmedPassword;
+      }
       this.$emit("update:modelValue", e.target.value)
     }
   }
