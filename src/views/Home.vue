@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import FieldEmail from '@/components/form/FieldEmail.vue'
-import FieldPassword from '@/components/form/FieldPassword.vue'
+import FieldEmail from '@/components/form/FieldEmail.vue';
+import FieldPassword from '@/components/form/FieldPassword.vue';
 
 export default {
   name: 'PageHome',
@@ -52,6 +52,7 @@ export default {
   methods: {
     onSubmit() {
       console.log(this.user);
+      this.$router.push({name:'PageTodo'});
     }
   }
 }
