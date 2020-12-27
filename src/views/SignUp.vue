@@ -10,19 +10,7 @@
   <section class="section">
     <div class="container">
       <form class="" action="" method="post">
-        <div class="field">
-          <label class="label">Email</label>
-          <div class="control has-icons-left has-icons-right">
-            <input class="input is-rounded is-danger" type="email" placeholder="Email input" value="hello@">
-            <span class="icon is-small is-left">
-              <i class="fas fa-envelope"></i>
-            </span>
-            <span class="icon is-small is-right">
-              <i class="fas fa-exclamation-triangle"></i>
-            </span>
-          </div>
-          <p class="help is-danger">This email is invalid</p>
-        </div>
+        <FieldEmail></FieldEmail>
         <div class="field">
           <label class="label">Password</label>
           <div class="control has-icons-left">
@@ -54,7 +42,9 @@
 </template>
 
 <script>
+import FieldEmail from '@/components/form/FieldEmail.vue'
 export default {
+  components: {FieldEmail}
 }
 </script>
 
