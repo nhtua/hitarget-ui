@@ -11,24 +11,7 @@
     <div class="container">
       <form class="" action="" method="post">
         <FieldEmail></FieldEmail>
-        <div class="field">
-          <label class="label">Password</label>
-          <div class="control has-icons-left">
-            <input class="input is-rounded" type="password" placeholder="Password">
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </div>
-        </div>
-        <div class="field">
-          <label class="label">Confirm password</label>
-          <div class="control has-icons-left">
-            <input class="input is-rounded" type="password" placeholder="Password">
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </div>
-        </div>
+        <FieldPassword :withConfirmation="true"></FieldPassword>
         <div class="field">
           <p class="control">
             <button class="button is-primary">
@@ -43,8 +26,9 @@
 
 <script>
 import FieldEmail from '@/components/form/FieldEmail.vue'
+import FieldPassword from '@/components/form/FieldPassword.vue'
 export default {
-  components: {FieldEmail}
+  components: {FieldEmail, FieldPassword}
 }
 </script>
 

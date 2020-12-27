@@ -2,7 +2,7 @@
   <div class="field">
     <label class="label">{{label}}</label>
     <div class="control has-icons-left has-icons-right">
-      <input v-model="email" class="input is-rounded" :class='{"is-danger":!isValid}' type="email" placeholder="Email input">
+      <input v-model="email" @focusout="()=>validate()" class="input is-rounded" :class='{"is-danger":!isValid}' type="email" placeholder="Email input">
       <span class="icon is-small is-left">
         <i class="fas fa-envelope"></i>
       </span>
@@ -26,14 +26,21 @@ export default {
   },
   data() {
     return {
-      email: ""
+      email: "",
+      v_email: ""
     }
   },
   computed: {
     isValid() {
-      if (this.email.trim() == "") return true;
+      if (this.v_email.trim() == "") return true;
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(this.email);
+      return re.test(this.v_email);
+    }
+  },
+  methods: {
+    validate() {
+      //just update value to trigger computed function isValid()
+      this.v_email = this.email;
     }
   }
 }
