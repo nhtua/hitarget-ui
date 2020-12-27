@@ -32,20 +32,20 @@ export default {
   emits: ['update:modelValue'],
   data() {
     return {
-      email: ""
+      v_email: "" //a.k.a validating_email
     }
   },
   computed: {
     isValid() {
-      if (this.email.trim() == "") return true;
+      if (this.v_email.trim() == "") return true;
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(this.email);
+      return re.test(this.v_email);
     }
   },
   methods: {
     validate(e) {
       //just update value to trigger computed function isValid()
-      this.email = e.target.value;
+      this.v_email = e.target.value;
       this.$emit('update:modelValue', e.target.value)
     }
   }
