@@ -2,7 +2,7 @@
   <div class="field">
     <label class="label">Password</label>
     <div class="control has-icons-left">
-      <input v-model="password" @focusout="()=>validate()" class="input is-rounded" :class='{"is-danger":!isValid}' type="password" placeholder="Password">
+      <input :value="modelValue" @focusout="validate" class="input is-rounded" :class='{"is-danger":!isValid}' type="password" placeholder="Password">
       <span class="icon is-small is-left">
         <i class="fas fa-lock"></i>
       </span>
@@ -12,7 +12,7 @@
   <div class="field" v-if="withConfirmation">
     <label class="label">Confirm password</label>
     <div class="control has-icons-left">
-      <input v-model="confirmedPassword" @focusout="()=>validate()" class="input is-rounded" :class='{"is-danger":!isConfirmed}' type="password" placeholder="Password">
+      <input v-model="confirmedPassword" @focusout="validate" class="input is-rounded" :class='{"is-danger":!isConfirmed}' type="password" placeholder="Password">
       <span class="icon is-small is-left">
         <i class="fas fa-lock"></i>
       </span>
@@ -29,11 +29,16 @@ export default {
       type: Boolean,
       default: false,
       require: false
+    },
+    modelValue: {
+      type: String,
+      default: "",
+      require: true
     }
   },
   data() {
     return {
-      password: "",
+      // password: this.modelValue,
       v_password: "",
       confirmedPassword: "",
       v_confirmedPassword: ""
@@ -56,10 +61,11 @@ export default {
     }
   },
   methods: {
-    validate() {
+    validate(e) {
       //just update value, computed function auto validate the input
-      this.v_password = this.password;
+      this.v_password = e.target.value;
       this.v_confirmedPassword = this.confirmedPassword;
+      this.$emit("update:modelValue", e.target.value)
     }
   }
 }

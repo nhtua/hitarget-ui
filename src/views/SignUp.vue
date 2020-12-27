@@ -11,7 +11,7 @@
     <div class="container">
       <form class="" action="" method="post" @submit.prevent="onSubmit">
         <FieldEmail v-model="email"></FieldEmail>
-        <FieldPassword :withConfirmation="true"></FieldPassword>
+        <FieldPassword v-model="password" :withConfirmation="true"></FieldPassword>
         <div class="field">
           <p class="control">
             <button class="button is-primary">
