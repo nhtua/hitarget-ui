@@ -9,8 +9,8 @@
   </section>
   <section class="section">
     <div class="container">
-      <form class="" action="" method="post">
-        <FieldEmail></FieldEmail>
+      <form class="" action="" method="post" @submit.prevent="onSubmit">
+        <FieldEmail v-model="email"></FieldEmail>
         <FieldPassword :withConfirmation="true"></FieldPassword>
         <div class="field">
           <p class="control">
@@ -28,7 +28,18 @@
 import FieldEmail from '@/components/form/FieldEmail.vue'
 import FieldPassword from '@/components/form/FieldPassword.vue'
 export default {
-  components: {FieldEmail, FieldPassword}
+  components: {FieldEmail, FieldPassword},
+  data() {
+    return {
+      email: "",
+      password: ""
+    }
+  },
+  methods: {
+    onSubmit() {
+      console.log(this.email, this.password);
+    }
+  }
 }
 </script>
 
