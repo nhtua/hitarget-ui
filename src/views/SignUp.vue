@@ -9,13 +9,13 @@
   </section>
   <section class="section">
     <div class="container">
-      <form class="" action="" method="post" @submit.prevent="onSubmit">
+      <form @submit.prevent="onSubmit">
         <FieldEmail v-model="email"></FieldEmail>
         <FieldPassword v-model="password" :withConfirmation="true"></FieldPassword>
         <div class="field">
           <p class="control">
             <button class="button is-primary">
-              Login
+              Register
             </button>
           </p>
         </div>
@@ -28,6 +28,7 @@
 import FieldEmail from '@/components/form/FieldEmail.vue'
 import FieldPassword from '@/components/form/FieldPassword.vue'
 export default {
+  name: 'SignUp',
   components: {FieldEmail, FieldPassword},
   data() {
     return {
