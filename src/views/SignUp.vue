@@ -28,7 +28,7 @@
 import FieldEmail from '@/components/form/FieldEmail.vue'
 import FieldPassword from '@/components/form/FieldPassword.vue'
 export default {
-  name: 'SignUp',
+  name: 'PageSignUp',
   components: {FieldEmail, FieldPassword},
   data() {
     return {

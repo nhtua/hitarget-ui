@@ -39,7 +39,7 @@ import FieldEmail from '@/components/form/FieldEmail.vue'
 import FieldPassword from '@/components/form/FieldPassword.vue'
 
 export default {
-  name: 'Home',
+  name: 'PageHome',
   components: {FieldEmail, FieldPassword},
   data () {
     return {
