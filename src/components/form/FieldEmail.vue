@@ -6,7 +6,7 @@
       <span class="icon is-small is-left">
         <i class="fas fa-envelope"></i>
       </span>
-      <span class="icon is-small is-right">
+      <span class="icon is-small is-right" v-if="!isValid">
         <i class="fas fa-exclamation-triangle"></i>
       </span>
     </div>

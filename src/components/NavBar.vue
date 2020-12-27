@@ -1,18 +1,18 @@
 <template>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <nav class="navbar" role="navigation" aria-label="main navigation" @click="hitBurger=!hitBurger">
     <div class="navbar-brand">
       <router-link to="/" class="navbar-item">
         <img src="@/assets/hitarget-logo-small.png" height="28">
       </router-link>
 
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMain">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNav">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
       </a>
     </div>
 
-    <div id="navMain" class="navbar-menu">
+    <div id="mainNav" class="navbar-menu" :class='{"is-active": hitBurger}'>
       <div class="navbar-start">
         <router-link :to="{name: 'Home'}" class="navbar-item">
           Home
@@ -39,3 +39,14 @@
     </div>
   </nav>
 </template>
+
+<script>
+  export default {
+    name: "MainNav",
+    data() {
+      return {
+        hitBurger: false
+      }
+    }
+  }
+</script>
