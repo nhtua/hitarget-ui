@@ -4,6 +4,7 @@
         <datepicker
           v-model="selected"
           :placeholder="hint"
+          @selected="$emit('update:modelValue', $event.target.value)"
         />
     </div>
   </div>
@@ -14,6 +15,7 @@ import datepicker from 'vue3-datepicker';
 export default {
   name: 'FieldDateTime',
   components: { datepicker },
+  emits: ['update:modelValue'],
   props: {
     hint: {
       type: String,
