@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import {format} from 'date-fns';
+import format from 'date-fns/format';
 
 export default {
   name: "TodoCard",

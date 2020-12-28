@@ -1,26 +1,33 @@
 <template lang="html">
-  <div class="container">
-
-    <div class="columns is-1-mobile is-2-tablet is-3-desktop">
-      <div class="column is-four-fifths">
-        <Card
-          :title="task.title"
-          :note="task.note"
-          :endDate="task.endDate || null"
-          v-for="(task, index) in todo" :key="index"/>
-      </div>
-      <div class="column is-one-fifths">
-        <div class="right-panel is-rounded tag-list has-background-light">
-          <div class="tag-item" v-for="(tag, index) in tags" :key="index"><span class="hash">#</span> {{tag}}</div>
+  <div class="section">
+    <div class="container" name="Summary">
+      <h1 class="title">Today is {{today}}</h1>
+      <h2 class="subtitle">you have {{inProgressCount}} routine task todo</h2>
+    </div>
+  </div>
+  <div class="section">
+    <div class="container" name="TaskList">
+      <div class="columns is-1-mobile is-2-tablet is-3-desktop">
+        <div class="column is-four-fifths">
+          <Card
+            :title="task.title"
+            :note="task.note"
+            :endDate="task.endDate || null"
+            v-for="(task, index) in todo" :key="index"/>
+        </div>
+        <div class="column is-one-fifths">
+          <div class="right-panel is-rounded tag-list has-background-light">
+            <div class="tag-item" v-for="(tag, index) in tags" :key="index"><span class="hash">#</span> {{tag}}</div>
+          </div>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
 import Card from '@/components/Card.vue';
+import format from 'date-fns/format';
 export default {
   name: "PageTodo",
   components: {Card},
@@ -47,6 +54,14 @@ export default {
           endDate: new Date('2021-01-15 00:00:00')
         }
       ]
+    }
+  },
+  computed: {
+    today() {
+      return format(new Date(), 'MMM d');
+    },
+    inProgressCount() {
+      return this.todo.length;
     }
   }
 }
