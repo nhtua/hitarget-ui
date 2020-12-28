@@ -1,22 +1,52 @@
 <template lang="html">
-  <div class="columns">
-    <div class="column is-four-fifths">
+  <div class="container">
 
-    </div>
-    <div class="column is-one-fifths">
-      <div class="right-panel tag-list">
-        <div class="tag-item" v-for="(tag, index) in tags" :key="index"><span class="hash"></span>{{tag}}</div>
+    <div class="columns is-1-mobile is-2-tablet is-3-desktop">
+      <div class="column is-four-fifths">
+        <Card
+          :title="task.title"
+          :note="task.note"
+          :endDate="task.endDate || null"
+          v-for="(task, index) in todo" :key="index"/>
+      </div>
+      <div class="column is-one-fifths">
+        <div class="right-panel is-rounded tag-list has-background-light">
+          <div class="tag-item" v-for="(tag, index) in tags" :key="index"><span class="hash">#</span> {{tag}}</div>
+        </div>
       </div>
     </div>
+
   </div>
 </template>
 
 <script>
+import Card from '@/components/Card.vue';
 export default {
   name: "PageTodo",
+  components: {Card},
   data() {
     return {
-      tags: ["docker","kubernetes", "CNCF", "translator"]
+      tags: ["docker","kubernetes", "CNCF", "translator"],
+      todo: [
+        {
+          id: 1,
+          title: "anim enim velit multos anim",
+          note: "nulla elit dolore dolor illum veniam quis aliqua legam velit anim minim export culpa anim cillum noster legam fugiat magna",
+          endDate: new Date('2021-01-15 00:00:00')
+        },
+        {
+          id: 2,
+          title: "sunt elit nisi dolor dolor amet fugiat sunt",
+          note: "culpa nisi anim minim labore aliqua fore sint irure ipsum",
+          endDate: new Date('2021-01-15 00:00:00')
+        },
+        {
+          id: 3,
+          title: "quid tamen fore magna",
+          note: "nulla quem sint duis sint tempor noster summis illum ipsum export dolore amet aliqua duis",
+          endDate: new Date('2021-01-15 00:00:00')
+        }
+      ]
     }
   }
 }
@@ -24,12 +54,17 @@ export default {
 
 <style lang="scss" scoped>
 .right-panel {
-  border: dotted 1px $soil-dark;
-  color: $soild-light;
+  border: solid 1px $soil-dark;
+  color: $soil-light;
+  margin: auto;
+  padding: 10px;
+  &.is-rounded {
+    border-radius: 5px;
+  }
 }
 .tag-list {
   .hash {
-    color:  #948356;
+    color:  $soil-dark;
     font-style: italic;
   }
 }

@@ -1,10 +1,14 @@
 <template>
   <NavBar/>
-  <router-view/>
+  <div class="global-padding">
+    <router-view/>
+  </div>
 </template>
 
 <style lang="scss">
-
+  div.global-padding {
+    padding: 0px 10px;
+  }
 </style>
 
 <script>
