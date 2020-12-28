@@ -46,5 +46,12 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
+ .box {
+   background: $soil-lightest;
+   &:hover {
+     background: $soil-lighter;
+     transition: linear 250ms background;
+   }
+ }
 </style>
