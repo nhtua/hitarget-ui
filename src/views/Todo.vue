@@ -11,6 +11,7 @@
       <form @submit.prevent="onSubmit">
         <FieldText hint="summary"/>
         <FieldLongText hint="note"/>
+        <FieldDateTime hint="choose the end of routine"/>
         <div class="field">
           <p class="control">
             <button class="button is-primary">
@@ -24,6 +25,7 @@
       </form>
     </div>
   </div>
+
   <div class="section">
     <div class="container" name="TaskList">
       <div class="columns is-1-mobile is-2-tablet is-3-desktop">
@@ -48,10 +50,11 @@
 import Card from '@/components/Card.vue';
 import FieldText from '@/components/form/FieldText.vue';
 import FieldLongText from '@/components/form/FieldLongText.vue';
+import FieldDateTime from '@/components/form/FieldDateTime.vue';
 import format from 'date-fns/format';
 export default {
   name: "PageTodo",
-  components: {Card, FieldText, FieldLongText},
+  components: {Card, FieldText, FieldLongText, FieldDateTime},
   data() {
     return {
       isOpenForm: false,
