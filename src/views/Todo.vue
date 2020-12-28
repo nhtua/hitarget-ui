@@ -17,7 +17,7 @@
               <span class="fas fa-plus"></span> <span>Add</span>
             </button>
             <button class="button is-light" @click="isOpenForm=false">
-              <span class="fas fa-times"></span> <span>Cancle</span>
+              <span class="fas fa-times"></span> <span>Cancel</span>
             </button>
           </p>
         </div>
