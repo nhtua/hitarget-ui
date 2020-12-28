@@ -1,7 +1,10 @@
 <template lang="html">
   <div class="field">
     <div class="control">
-      <textarea :value="modelValue" class="textarea" :placeholder="hint"></textarea>
+      <textarea
+        :value="modelValue"
+        @input="$emit('update:modelValue',$event.target.value)"
+        class="textarea" :placeholder="hint"></textarea>
     </div>
   </div>
 </template>
@@ -9,6 +12,7 @@
 <script>
 export default {
   name: 'FieldText',
+  emits: ['update:modelValue'],
   props: {
     hint: {
       type: String,
