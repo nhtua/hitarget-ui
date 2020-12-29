@@ -1,9 +1,11 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation" @click="hitBurger=!hitBurger">
     <div class="navbar-brand">
-      <router-link to="/" class="navbar-item">
-        <img src="@/assets/hitarget-logo-small.png" height="28">
-      </router-link>
+      <span  @click.stop="hitBurger=false">        
+        <router-link to="/" class="navbar-item">
+          <img src="@/assets/hitarget-logo-small.png" height="28">
+        </router-link>
+      </span>
 
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNav">
         <span aria-hidden="true"></span>
