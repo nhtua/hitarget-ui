@@ -1,20 +1,18 @@
 <template lang="html">
   <div class="field">
     <div class="control">
-        <datepicker
-          v-model="selected"
-          :placeholder="hint"
-          @selected="$emit('update:modelValue', $event.target.value)"
-        />
+      <DatePicker v-model="date" @update:modelValue="onSelect" />
     </div>
   </div>
 </template>
 
 <script>
-import datepicker from 'vue3-datepicker';
+import { DatePicker } from 'v-calendar';
 export default {
   name: 'FieldDateTime',
-  components: { datepicker },
+  components: {
+    DatePicker
+  },
   emits: ['update:modelValue'],
   props: {
     hint: {
@@ -25,12 +23,17 @@ export default {
   },
   data() {
     return {
-      selected: null
+      date: new Date(),
+    }
+  },
+  methods: {
+    onSelect(e) {
+      this.$emit('update:modelValue', e)
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-  @import '~vue3-datepicker/dist/vue3-datepicker.css';
+<style lang="scss">
+
 </style>

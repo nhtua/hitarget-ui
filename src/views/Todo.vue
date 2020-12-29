@@ -9,9 +9,10 @@
     </div>
     <div v-if="isOpenForm" class="container inner-section" name="NewTaskForm">
       <form @submit.prevent="onSubmit">
-        <FieldText hint="summary"/>
-        <FieldLongText hint="note"/>
-        <FieldDateTime hint="choose the end of routine"/>
+        <FieldText v-model="newTask.summary" hint="summary"/>
+        <FieldLongText v-model="newTask.note" hint="note"/>
+        <FieldDateTime v-model="newTask.endDate" hint="choose the end of routine"/>
+        <FieldText v-model="newTask.duration" hint="hours each day? 2 hours 30 mins"/>
         <div class="field">
           <p class="control">
             <button class="button is-primary">
@@ -31,9 +32,10 @@
       <div class="columns is-1-mobile is-2-tablet is-3-desktop">
         <div class="column is-four-fifths">
           <Card
-            :title="task.title"
+            :summary="task.summary"
             :note="task.note"
             :endDate="task.endDate || null"
+            :duration="task.duration"
             v-for="(task, index) in todo" :key="index"/>
         </div>
         <div class="column is-one-fifths">
@@ -58,23 +60,29 @@ export default {
   data() {
     return {
       isOpenForm: false,
+      newTask: {
+        summary:"",
+        note:"",
+        endDate:null,
+        duration: ""
+      },
       tags: ["docker","kubernetes", "CNCF", "translator"],
       todo: [
         {
           id: 1,
-          title: "anim enim velit multos anim",
+          summary: "anim enim velit multos anim",
           note: "nulla elit dolore dolor illum veniam quis aliqua legam velit anim minim export culpa anim cillum noster legam fugiat magna",
           endDate: new Date('2021-01-15 00:00:00')
         },
         {
           id: 2,
-          title: "sunt elit nisi dolor dolor amet fugiat sunt",
+          summary: "sunt elit nisi dolor dolor amet fugiat sunt",
           note: "culpa nisi anim minim labore aliqua fore sint irure ipsum",
           endDate: new Date('2021-01-15 00:00:00')
         },
         {
           id: 3,
-          title: "quid tamen fore magna",
+          summary: "quid tamen fore magna",
           note: "nulla quem sint duis sint tempor noster summis illum ipsum export dolore amet aliqua duis",
           endDate: new Date('2021-01-15 00:00:00')
         }
@@ -91,7 +99,25 @@ export default {
   },
   methods: {
     onSubmit() {
-
+      const {summary, note, endDate} = this.newTask;
+      console.log({summary, note, endDate});
+      this.todo.unshift({
+        id: this.todo.length + 1,
+        summary,
+        note,
+        endDate,
+        percent: 0
+      });
+      this.resetForm();
+      this.isOpenForm = false;
+    },
+    resetForm() {
+      this.newTask = {
+        summary:"",
+        note:"",
+        endDate:null,
+        duration: 1
+      }
     }
   }
 }

@@ -13,7 +13,7 @@
       <div class="media-content">
         <div class="content">
           <p>
-            <strong>{{title}}</strong> <small v-if="endDate">End of {{deadline}}</small>
+            <strong>{{summary}}</strong> <small v-if="endDate">End of {{deadline}}</small>
             <br>
             {{note}}
           </p>
@@ -31,7 +31,7 @@ import format from 'date-fns/format';
 export default {
   name: "TodoCard",
   props: {
-    title: {
+    summary: {
       type: String,
       require: true,
       default: ''
