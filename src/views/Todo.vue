@@ -11,14 +11,18 @@
       <form @submit.prevent="onSubmit">
         <FieldText v-model="newTask.summary" hint="summary"/>
         <FieldLongText v-model="newTask.note" hint="note"/>
-        <FieldDateTime v-model="newTask.endDate" hint="choose the end of routine"/>
         <FieldText v-model="newTask.duration" hint="hours each day? 2 hours 30 mins"/>
         <div class="field">
-          <p class="control">
+          <button @click.prevent="toggleEndDate" class="button is-light is-small" v-if="!needEndDate"><span class="fas fa-plus"></span> <span>repeat every day until?</span></button>
+          <button @click.prevent="toggleEndDate" class="button is-light is-small" v-else><span class="fas fa-minus"></span> <span>no end date</span></button>
+        </div>
+        <FieldDateTime v-model="newTask.endDate" hint="choose the end of routine" v-if="needEndDate"/>
+        <div class="field">
+          <p class="control buttons has-addons is-right">
             <button class="button is-primary">
               <span class="fas fa-plus"></span> <span>Add</span>
             </button>
-            <button class="button is-light" @click="isOpenForm=false">
+            <button class="button is-light" @click.prevent="isOpenForm=false">
               <span class="fas fa-times"></span> <span>Cancel</span>
             </button>
           </p>
@@ -36,7 +40,7 @@
             :note="task.note"
             :endDate="task.endDate || null"
             :duration="task.duration"
-            v-for="(task, index) in todo" :key="index"/>
+            v-for="task in todo" :key="task.id"/>
         </div>
         <div class="column is-one-fifths">
           <div class="right-panel is-rounded tag-list has-background-light">
@@ -64,8 +68,9 @@ export default {
         summary:"",
         note:"",
         endDate:null,
-        duration: ""
+        duration: ''
       },
+      needEndDate: false,
       tags: ["docker","kubernetes", "CNCF", "translator"],
       todo: [
         {
@@ -116,7 +121,14 @@ export default {
         summary:"",
         note:"",
         endDate:null,
-        duration: 1
+        duration: ''
+      };
+      this.needEndDate = false;
+    },
+    toggleEndDate() {
+      this.needEndDate = !this.needEndDate;
+      if (this.needEndDate == false) {
+        this.newTask.endDate = null;
       }
     }
   }
