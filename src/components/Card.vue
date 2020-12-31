@@ -5,8 +5,8 @@
         <figure class="image is-64x64">
           <div  class="progress-clock is-64x64" :class="isCompleted" v-show="!showControl"><span>{{percent}}%</span></div>
           <div class="progress-control" :class="isCompleted" v-show="showControl" @click.stop="toggleControl">
-            <span v-show="isRunning"><i class="fas fa-running"></i></span>
-            <span v-show="!isRunning"><i class="fas fa-hand-paper"></i></span>
+            <span v-show="!isRunning"><i class="fas fa-running"></i></span>
+            <span v-show="isRunning"><i class="fas fa-hand-paper"></i></span>
           </div>
         </figure>
       </div>
