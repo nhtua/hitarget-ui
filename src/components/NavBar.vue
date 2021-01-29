@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation" @click="hitBurger=!hitBurger">
     <div class="navbar-brand">
-      <span  @click.stop="hitBurger=false">        
+      <span  @click.stop="hitBurger=false">
         <router-link to="/" class="navbar-item">
           <img src="@/assets/hitarget-logo-small.png" height="28">
         </router-link>
@@ -30,7 +30,10 @@
       </div>
 
       <div class="navbar-end">
-        <div class="navbar-item">
+        <div class="navebar-item" v-if="currentUser">
+          {{currentUser.name}}
+        </div>
+        <div class="navbar-item" v-if="!currentUser">
           <div class="buttons">
             <router-link :to="{name:'SignUp'}" class="button is-primary">
               <strong>Sign up</strong>
@@ -47,7 +50,12 @@
     name: "MainNav",
     data() {
       return {
-        hitBurger: false
+        hitBurger: false,
+      }
+    },
+    computed: {
+      currentUser() {
+        return this.$store.state.User.currentUser
       }
     }
   }

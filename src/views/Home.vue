@@ -52,6 +52,7 @@ export default {
   methods: {
     onSubmit() {
       console.log(this.user);
+      this.$store.dispatch('User/loginUser', this.user);
       this.$router.push({name:'PageTodo'});
     }
   }
