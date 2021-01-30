@@ -37,7 +37,7 @@
 <script>
 import FieldEmail from '@/components/form/FieldEmail.vue'
 import FieldPassword from '@/components/form/FieldPassword.vue'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'PageHome',
@@ -51,11 +51,10 @@ export default {
     }
   },
   computed: {
-    currentUser() {
-      return this.$store.state.User.currentUser;
-    }
+    ...mapState('User', ['currentUser'])
   },
   methods: {
+    ...mapActions('User', ['loginUser']),
     onSubmit() {
       console.log(this.user);
       this.loginUser(this.user).then(()=>{
@@ -63,10 +62,7 @@ export default {
           this.$router.push({name:'PageTodo'});
         }
       });
-    },
-    ...mapActions('User', [
-      'loginUser'
-    ])
+    }
   }
 }
 </script>
