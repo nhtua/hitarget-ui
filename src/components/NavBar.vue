@@ -30,9 +30,27 @@
       </div>
 
       <div class="navbar-end">
-        <div class="navebar-item" v-if="currentUser">
+        <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link" v-if="currentUser">
           {{currentUser.name}}
+        </a>
+
+        <div class="navbar-dropdown">
+          <a class="navbar-item">
+            Strikes
+          </a>
+          <a class="navbar-item">
+            Settings
+          </a>
+          <a class="navbar-item">
+            Log-out
+          </a>
+          <hr class="navbar-divider">
+          <a class="navbar-item">
+            Report an issue
+          </a>
         </div>
+      </div>
         <div class="navbar-item" v-if="!currentUser">
           <div class="buttons">
             <router-link :to="{name:'SignUp'}" class="button is-primary">
