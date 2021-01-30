@@ -2,7 +2,7 @@
   <div class="field">
     <label class="label">Password</label>
     <div class="control has-icons-left">
-      <input :value="modelValue" @focusout="validate" class="input is-rounded" :class='{"is-danger":!isValid}' type="password" placeholder="Password">
+      <input :value="modelValue" @keyup="validate" class="input is-rounded" :class='{"is-danger":!isValid}' type="password" placeholder="Password">
       <span class="icon is-small is-left">
         <i class="fas fa-lock"></i>
       </span>
@@ -12,7 +12,7 @@
   <div class="field" v-if="withConfirmation">
     <label class="label">Confirm password</label>
     <div class="control has-icons-left">
-      <input v-model="confirmedPassword" @focusout="validate" class="input is-rounded" :class='{"is-danger":!isConfirmed}' type="password" placeholder="Password">
+      <input v-model="confirmedPassword" @keyup="validate" class="input is-rounded" :class='{"is-danger":!isConfirmed}' type="password" placeholder="Password">
       <span class="icon is-small is-left">
         <i class="fas fa-lock"></i>
       </span>

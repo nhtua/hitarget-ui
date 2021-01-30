@@ -56,7 +56,7 @@ export default {
   methods: {
     ...mapActions('User', ['loginUser']),
     onSubmit() {
-      console.log(this.user);
+      console.log(this.user.password);
       this.loginUser(this.user).then(()=>{
         if (this.currentUser) {
           this.$router.push({name:'PageTodo'});
