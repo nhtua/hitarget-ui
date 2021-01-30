@@ -58,6 +58,8 @@ import FieldText from '@/components/form/FieldText.vue';
 import FieldLongText from '@/components/form/FieldLongText.vue';
 import FieldDateTime from '@/components/form/FieldDateTime.vue';
 import format from 'date-fns/format';
+import {mapState} from 'vuex';
+
 
 export default {
   name: "PageTodo",
@@ -96,11 +98,17 @@ export default {
     }
   },
   computed: {
+    ...mapState('User', ['currentUser']),
     today() {
       return format(new Date(), 'MMM d');
     },
     inProgressCount() {
       return this.todo.length;
+    }
+  },
+  watch: {
+    currentUser(u) {
+      if (!u) this.$router.push({name:'Home'})
     }
   },
   methods: {
