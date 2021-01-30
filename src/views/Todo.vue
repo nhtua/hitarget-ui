@@ -42,7 +42,7 @@
             :duration="task.duration"
             v-for="task in todo" :key="task.id"/>
         </div>
-        <div class="column is-one-fifths">
+        <div class="column is-one-fifths" v-if="tags.length > 0">
           <div class="right-panel is-rounded tag-list has-background-light">
             <div class="tag-item" v-for="(tag, index) in tags" :key="index"><span class="hash">#</span> {{tag}}</div>
           </div>
@@ -74,7 +74,7 @@ export default {
         duration: ''
       },
       needEndDate: false,
-      tags: ["docker","kubernetes", "CNCF", "translator"],
+      tags: [],
       todo: [
         {
           id: 1,
