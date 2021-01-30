@@ -36,6 +36,9 @@
         </a>
 
         <div class="navbar-dropdown">
+          <router-link :to="{name: 'PageTodo'}" class="navbar-item">
+            Todos
+          </router-link>
           <a class="navbar-item">
             Strikes
           </a>

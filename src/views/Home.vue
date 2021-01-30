@@ -15,7 +15,7 @@
             </p>
           </div>
         </div>
-        <div class="column is-one-thirds" id="loginForm">
+        <div class="column is-one-thirds" id="loginForm" v-if="!currentUser">
           <form @submit.prevent="onSubmit">
             <FieldEmail v-model="user.email" :withValidation="false"></FieldEmail>
             <FieldPassword v-model="user.password" :withValidation="false"></FieldPassword>
@@ -35,8 +35,9 @@
 </template>
 
 <script>
-import FieldEmail from '@/components/form/FieldEmail.vue';
-import FieldPassword from '@/components/form/FieldPassword.vue';
+import FieldEmail from '@/components/form/FieldEmail.vue'
+import FieldPassword from '@/components/form/FieldPassword.vue'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'PageHome',
@@ -49,12 +50,23 @@ export default {
       }
     }
   },
+  computed: {
+    currentUser() {
+      return this.$store.state.User.currentUser;
+    }
+  },
   methods: {
     onSubmit() {
       console.log(this.user);
-      this.$store.dispatch('User/loginUser', this.user);
-      this.$router.push({name:'PageTodo'});
-    }
+      this.loginUser(this.user).then(()=>{
+        if (this.currentUser) {
+          this.$router.push({name:'PageTodo'});
+        }
+      });
+    },
+    ...mapActions('User', [
+      'loginUser'
+    ])
   }
 }
 </script>
