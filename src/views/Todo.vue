@@ -58,6 +58,7 @@ import FieldText from '@/components/form/FieldText.vue';
 import FieldLongText from '@/components/form/FieldLongText.vue';
 import FieldDateTime from '@/components/form/FieldDateTime.vue';
 import format from 'date-fns/format';
+
 export default {
   name: "PageTodo",
   components: {Card, FieldText, FieldLongText, FieldDateTime},

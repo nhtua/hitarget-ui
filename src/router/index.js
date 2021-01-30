@@ -39,12 +39,14 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
+  await store.dispatch('User/getToken');
+  if (store.state.User.token && !store.state.User.currentUser)
+    await store.dispatch('User/fetchUser', store.state.User.token);
+
   const isLoggedIn = store.state.User.currentUser != null;
   const requiresLogin = to.matched.some(path => path.meta.requiresLogin);
-  if (requiresLogin && !isLoggedIn)
-    next({name:'Home'});
-  else
-    next();
+  if (requiresLogin && !isLoggedIn) next({name:'Home'});
+  else next();
 })
 
 export default router
