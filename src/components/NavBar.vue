@@ -45,7 +45,7 @@
           <a class="navbar-item">
             Settings
           </a>
-          <a class="navbar-item">
+          <a class="navbar-item" @click="logout">
             Log-out
           </a>
           <hr class="navbar-divider">
@@ -67,6 +67,8 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
+
   export default {
     name: "MainNav",
     data() {
@@ -78,6 +80,9 @@
       currentUser() {
         return this.$store.state.User.currentUser
       }
+    },
+    methods: {
+      ...mapActions('User', ['logout'])
     }
   }
 </script>

@@ -17,7 +17,7 @@ export const UserStoreModule = {
     }
   },
   actions: {
-    async fetchUser({ commit, dispatch }, token) {      
+    async fetchUser({ commit, dispatch }, token) {
       const response = await axios.get(Config.API_HOST+"/users/me", {
         headers: {'Authorization': 'Bearer '+token}
       });
@@ -36,6 +36,11 @@ export const UserStoreModule = {
     async setToken({ commit }, token) {
       window.localStorage.setItem('user_token', token)
       commit('setCurrentToken', token)
+    },
+    async logout({commit, dispatch}) {
+      dispatch('setToken', '')
+      commit('setCurrentToken', null)
+      commit('setCurrentUser', null)
     }
   }
 }
