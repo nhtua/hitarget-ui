@@ -5,7 +5,7 @@ export function dehumanize(d) {
   if (signs) {
     for(let i in signs) {
       const x = signs[i].replace(/\s+/,',')
-      d = d.replaceAll(signs[i], x)
+      d = d.replace(new RegExp(signs[i],"g"), x)
     }
   }
   const pieces = d.split(',').filter(x=>x)
