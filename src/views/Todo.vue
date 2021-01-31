@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="section">
     <div class="container inner-section" name="Summary">
       <h1 class="title">Today is {{today}}</h1>

@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="field">
     <div class="control">
       <DatePicker v-model="date" @update:modelValue="onSelect" />

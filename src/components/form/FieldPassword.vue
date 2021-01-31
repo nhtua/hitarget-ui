@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="field">
     <label class="label">Password</label>
     <div class="control has-icons-left">

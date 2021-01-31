@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <section class="section">
     <div class="container">
       <h1 class="title">Are you ready for new targets?</h1>

@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="box">
     <article class="media">
       <div class="media-left"  @mouseover="showControl=true" @mouseleave="showControl=false">

@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <h1>Buy me a beer 🍺</h1>
 </template>
 
