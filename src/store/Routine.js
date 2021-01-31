@@ -32,7 +32,7 @@ export const RoutineStoreModule = {
         delete data.endDate
       }
       const result = await axios.post(rootState.Config.data.API_HOST+'/routine', data,jwtHeader(rootState.User.token))
-      commit('setTodoList', [...state.todoList, result.data])
+      commit('setTodoList', [result.data, ...state.todoList])
     }
   }
 }
