@@ -39,3 +39,15 @@ describe('Dehumanize Single Time', () => {
     expect(dehumanize(input2)).toEqual(exp)
   })
 })
+
+
+describe("Dehumanize complex time", () => {
+  it("Level 1 - Long format", ()=>{
+    const input = "2 minutes 3 seconds"
+    expect(dehumanize(input)).toEqual(2 * 60 + 3)
+  })
+  it("Level 1 - Long format extended", ()=>{
+    const input = "2 hours, 30 minute, 4seconds"
+    expect(dehumanize(input)).toEqual(2*60*60 + 30*60 + 4)
+  })
+})

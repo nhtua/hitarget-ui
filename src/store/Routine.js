@@ -1,6 +1,7 @@
 import axios from 'axios'
 import format from 'date-fns/format'
 import {jwtHeader} from './helper'
+import {dehumanize} from '@/helpers/time'
 
 export const RoutineStoreModule = {
   namespaced: true,
@@ -31,7 +32,9 @@ export const RoutineStoreModule = {
         data.end_date = format(data.endDate, 'yyyy-MM-dd')
         delete data.endDate
       }
-      const result = await axios.post(rootState.Config.data.API_HOST+'/routine', data,jwtHeader(rootState.User.token))
+      let d = data.duration.toLowerCase()
+      data.duration = dehumanize(d)
+      const result = await axios.post(rootState.Config.data.API_HOST+'/routine', data, jwtHeader(rootState.User.token))
       commit('setTodoList', [result.data, ...state.todoList])
     }
   }
