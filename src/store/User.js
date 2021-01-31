@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-import {Config} from '../config'
-
 export const UserStoreModule = {
   namespaced: true,
   state: {
@@ -17,15 +15,15 @@ export const UserStoreModule = {
     }
   },
   actions: {
-    async fetchUser({ commit, dispatch }, token) {
-      const response = await axios.get(Config.API_HOST+"/users/me", {
+    async fetchUser({ commit, dispatch, rootState }, token) {
+      const response = await axios.get(rootState.Config.data.API_HOST+"/users/me", {
         headers: {'Authorization': 'Bearer '+token}
       });
       dispatch('setToken', response.data.token)
       commit('setCurrentUser', response.data)
     },
-    async loginUser({commit, dispatch}, form) {
-      const response = await axios.post(Config.API_HOST+"/users/login", form)
+    async loginUser({commit, dispatch, rootState}, form) {
+      const response = await axios.post(rootState.Config.data.API_HOST+"/users/login", form)
       dispatch('setToken', response.data.token)
       commit('setCurrentUser', response.data)
     },
