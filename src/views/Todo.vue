@@ -3,7 +3,7 @@
     <div class="container inner-section" name="Summary">
       <h1 class="title">Today is {{today}}</h1>
       <h2 class="subtitle">
-        you have {{inProgressCount}} routine task{{inProgressCount>1?'s':''}} todo,
+        you have {{inProgressCount}} routine{{inProgressCount>1?'s':''}} todo,
         or you can <span class="tag is-warning" @click="isOpenForm=!isOpenForm">add</span> one more...
       </h2>
     </div>
