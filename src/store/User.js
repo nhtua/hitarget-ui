@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import {jwtHeader} from './helper'
+
 export const UserStoreModule = {
   namespaced: true,
   state: {
@@ -15,10 +17,8 @@ export const UserStoreModule = {
     }
   },
   actions: {
-    async fetchUser({ commit, dispatch, rootState }, token) {
-      const response = await axios.get(rootState.Config.data.API_HOST+"/users/me", {
-        headers: {'Authorization': 'Bearer '+token}
-      });
+    async fetchUser({ commit, dispatch, rootState, state }) {
+      const response = await axios.get(rootState.Config.data.API_HOST+"/users/me", jwtHeader(state.token));
       dispatch('setToken', response.data.token)
       commit('setCurrentUser', response.data)
     },
