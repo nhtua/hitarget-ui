@@ -40,7 +40,7 @@
             :note="task.note"
             :endDate="task.endDate || null"
             :duration="task.duration"
-            v-for="task in todo" :key="task.id"/>
+            v-for="task in todoList" :key="task.id"/>
         </div>
         <div class="column is-one-fifths" v-if="tags.length > 0">
           <div class="right-panel is-rounded tag-list has-background-light">
@@ -58,7 +58,7 @@ import FieldText from '@/components/form/FieldText.vue';
 import FieldLongText from '@/components/form/FieldLongText.vue';
 import FieldDateTime from '@/components/form/FieldDateTime.vue';
 import format from 'date-fns/format';
-import {mapState} from 'vuex';
+import {mapState, mapActions} from 'vuex';
 
 
 export default {
@@ -74,36 +74,20 @@ export default {
         duration: ''
       },
       needEndDate: false,
-      tags: [],
-      todo: [
-        {
-          id: 1,
-          summary: "anim enim velit multos anim",
-          note: "nulla elit dolore dolor illum veniam quis aliqua legam velit anim minim export culpa anim cillum noster legam fugiat magna",
-          endDate: new Date('2021-01-15 00:00:00')
-        },
-        {
-          id: 2,
-          summary: "sunt elit nisi dolor dolor amet fugiat sunt",
-          note: "culpa nisi anim minim labore aliqua fore sint irure ipsum",
-          endDate: new Date('2021-01-15 00:00:00')
-        },
-        {
-          id: 3,
-          summary: "quid tamen fore magna",
-          note: "nulla quem sint duis sint tempor noster summis illum ipsum export dolore amet aliqua duis",
-          endDate: new Date('2021-01-15 00:00:00')
-        }
-      ]
+      tags: []
     }
+  },
+  created() {
+    this.fetchTodoList()
   },
   computed: {
     ...mapState('User', ['currentUser']),
+    ...mapState('Routine', ['todoList']),
     today() {
       return format(new Date(), 'MMM d');
     },
     inProgressCount() {
-      return this.todo.length;
+      return this.todoList.length;
     }
   },
   watch: {
@@ -112,16 +96,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions('Routine', ['fetchTodoList']),
     onSubmit() {
       const {summary, note, endDate} = this.newTask;
       console.log({summary, note, endDate});
-      this.todo.unshift({
-        id: this.todo.length + 1,
-        summary,
-        note,
-        endDate,
-        percent: 0
-      });
       this.resetForm();
       this.isOpenForm = false;
     },

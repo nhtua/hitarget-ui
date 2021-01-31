@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import Config from '../config.json'
+import {jwtHeader} from './helper'
 
 export const RoutineStoreModule = {
   namespaced: true,
@@ -13,8 +13,14 @@ export const RoutineStoreModule = {
     }
   },
   actions: {
-    async fetchTodoList( {commit}, token ) {
-      const result = await axios.get(Config.API_HOST)
+    async fetchTodoList( {commit, rootState}) {
+      const result = await axios.get(rootState.Config.data.API_HOST+'/routine', jwtHeader(rootState.User.token))
+      const data = result.data.map(item=>{
+        item.endDate = new Date(item.end_date+" 00:00:00");
+        delete item.end_date;
+        return item
+      })
+      commit('setTodoList', data)
     }
   }
 }

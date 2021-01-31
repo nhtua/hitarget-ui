@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
-import {UserStoreModule} from './User'
 import {ConfigStoreModule} from './Config'
+import {UserStoreModule} from './User'
+import {RoutineStoreModule} from './Routine'
 
 export default createStore({
   state: {
@@ -11,6 +12,7 @@ export default createStore({
   },
   modules: {
     Config: ConfigStoreModule,
-    User: UserStoreModule
+    User: UserStoreModule,
+    Routine: RoutineStoreModule
   }
 })
