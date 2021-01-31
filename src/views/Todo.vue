@@ -96,12 +96,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions('Routine', ['fetchTodoList']),
+    ...mapActions('Routine', ['fetchTodoList', 'addRoutine']),
     onSubmit() {
-      const {summary, note, endDate} = this.newTask;
-      console.log({summary, note, endDate});
-      this.resetForm();
-      this.isOpenForm = false;
+      this.addRoutine(this.newTask)
+      this.resetForm()
+      this.isOpenForm = false
     },
     resetForm() {
       this.newTask = {
