@@ -50,4 +50,28 @@ describe("Dehumanize complex time", () => {
     const input = "2 hours, 30 minute, 4seconds"
     expect(dehumanize(input)).toEqual(2*60*60 + 30*60 + 4)
   })
+  it("Level 2 - Combined format", ()=>{
+    const input = "2minutes3seconds"
+    expect(dehumanize(input)).toEqual(2 * 60 + 3)
+  })
+  it("Level 2 - Extend combined format", ()=>{
+    const input = "2hours,30minute,4seconds"
+    expect(dehumanize(input)).toEqual(2*60*60 + 30*60 + 4)
+  })
+  it("Level 1 - Short format", ()=>{
+    const input = "2m3s"
+    expect(dehumanize(input)).toEqual(2 * 60 + 3)
+  })
+  it("Level 1 - Short format extended", ()=>{
+    const input = "2h,30m,4s"
+    expect(dehumanize(input)).toEqual(2*60*60 + 30*60 + 4)
+  })
+  it("Level 2 - Combined short format", ()=>{
+    const input = "2m3s"
+    expect(dehumanize(input)).toEqual(2 * 60 + 3)
+  })
+  it("Level 2 - Extend combined short format", ()=>{
+    const input = "2h,30m,4s"
+    expect(dehumanize(input)).toEqual(2*60*60 + 30*60 + 4)
+  })
 })
