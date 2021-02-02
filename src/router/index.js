@@ -40,8 +40,14 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   await store.dispatch('User/getToken');
-  if (store.state.User.token && !store.state.User.currentUser)
-    await store.dispatch('User/fetchUser');
+  if (store.state.User.token && !store.state.User.currentUser) {
+    try {
+      await store.dispatch('User/fetchUser');
+    } catch (err) {
+      await store.dispatch('User/setToken', null)
+    }
+  }
+
 
   const isLoggedIn = store.state.User.currentUser != null;
   const requiresLogin = to.matched.some(path => path.meta.requiresLogin);
