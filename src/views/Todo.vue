@@ -36,6 +36,7 @@
       <div class="columns is-1-mobile is-2-tablet is-3-desktop">
         <div class="column is-four-fifths">
           <Card
+            :cardId="task.id"
             :summary="task.summary"
             :note="task.note"
             :endDate="task.endDate || null"

@@ -11,6 +11,11 @@ export const RoutineStoreModule = {
   mutations: {
     setTodoList(state, todoList) {
       state.todoList = todoList
+    },
+    replaceTask(state, task) {
+      state.todoList.forEach((v,i)=>{
+        if (v.id == task.id) state.todoList[i] = task
+      })
     }
   },
   actions: {
@@ -36,6 +41,12 @@ export const RoutineStoreModule = {
       data.duration = dehumanize(d)
       const result = await axios.post(rootState.Config.data.API_HOST+'/routine', data, jwtHeader(rootState.User.token))
       commit('setTodoList', [result.data, ...state.todoList])
+    },
+    async addCheckpoint( {commit, rootState}, checkpoint) {
+      const result = await axios.put(rootState.Config.data.API_HOST+'/routine/checkpoint',
+        checkpoint,
+        jwtHeader(rootState.User.token))
+      commit('replaceTask', result.data)
     }
   }
 }

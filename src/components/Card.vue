@@ -26,11 +26,16 @@
 </template>
 
 <script>
-import format from 'date-fns/format';
+import format from 'date-fns/format'
+import {mapActions} from 'vuex'
 
 export default {
   name: "TodoCard",
   props: {
+    cardId: {
+      type: String,
+      require: true
+    },
     summary: {
       type: String,
       require: true,
@@ -66,19 +71,20 @@ export default {
     }
   },
   methods: {
+    ...mapActions('Routine', ['addCheckpoint']),
     toggleControl() {
-      this.isRunning = !this.isRunning;
-      this.percent += this.percent<100 ?10 :0;
+      this.isRunning = !this.isRunning
+      this.addCheckpoint({routine_id: this.cardId, is_running: this.isRunning})
     },
     colorStatus() {
-      let cssClass = "";
+      let cssClass = ""
       if (this.isCompleted) {
-        cssClass += "is-completed ";
+        cssClass += "is-completed "
       }
       if (this.isRunning && !this.isCompleted) {
-        cssClass += "is-running ";
+        cssClass += "is-running "
       }
-      return cssClass;
+      return cssClass
     }
   }
 }
