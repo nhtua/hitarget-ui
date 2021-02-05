@@ -41,6 +41,13 @@ export default {
       intervalJob: null
     }
   },
+  mounted() {
+    const checkpoint = this.getCurrentCheckpoint()
+    if (checkpoint && checkpoint.is_running) {
+      this.isRunning = false
+      this.toggleControl()
+    }
+  },
   computed: {
     percentage() {
       let cp = this.getCurrentCheckpoint()
@@ -68,9 +75,10 @@ export default {
       }
       if (this.isRunning) {
         this.intervalJob = setInterval(()=>{
-          if (this.percentage >= 100) {
+          if (this.percentage < 100) {
             this.addCheckpoint({routine_id: this.routine.id, is_running: true})
           } else {
+            this.addCheckpoint({routine_id: this.routine.id, is_running: false})
             clearInterval(this.intervalJob)
           }
         }, 10000)
