@@ -4,8 +4,9 @@
     <div class="control">
       <input
         :value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
+        @keyup="onChanged"
         class="input" :class='{"is-rounded": isRounded}' type="text" :placeholder="hint">
+      <p class="help is-danger" v-if="!isValid">{{msg}}</p>
     </div>
   </div>
 </template>
@@ -34,6 +35,25 @@ export default {
       type: Boolean,
       require: false,
       default: false
+    },
+    validator: {
+      type: Function,
+      require: false,
+      default: ()=>{return {isValid: true, message:""}}
+    }
+  },
+  data() {
+    return {
+      isValid: true,
+      msg: ""
+    }
+  },
+  methods: {
+    onChanged(e) {
+      const result = this.validator(e.target.value);
+      this.isValid = result.isValid
+      this.msg = result.message
+      this.$emit('update:modelValue', e.target.value)
     }
   }
 }

@@ -1,7 +1,7 @@
 import ms from 'ms';
 
 export function dehumanize(d) {
-  d = d.toLowerCase()
+  d = d.toLowerCase().trim()
   const signs = d.match(/([a-z][0-9]|[a-z,]\s+[0-9])/g)
   if (signs) {
     for(let i in signs) {

@@ -11,7 +11,7 @@
       <form @submit.prevent="onSubmit">
         <FieldText v-model="newTask.summary" hint="summary"/>
         <FieldLongText v-model="newTask.note" hint="note"/>
-        <FieldText v-model="newTask.duration" hint="hours each day? 2 hours 30 mins"/>
+        <FieldText v-model="newTask.duration" :validator="checkDuration" hint="hours each day? 2 hours 30 mins"/>
         <div class="field">
           <button @click.prevent="toggleEndDate" class="button is-light is-small" v-if="!needEndDate"><span class="fas fa-plus"></span> <span>repeat every day until?</span></button>
           <button @click.prevent="toggleEndDate" class="button is-light is-small" v-else><span class="fas fa-minus"></span> <span>no end date</span></button>
@@ -53,12 +53,14 @@
 </template>
 
 <script>
-import Card from '@/components/Card.vue';
-import FieldText from '@/components/form/FieldText.vue';
-import FieldLongText from '@/components/form/FieldLongText.vue';
-import FieldDateTime from '@/components/form/FieldDateTime.vue';
-import format from 'date-fns/format';
-import {mapState, mapActions} from 'vuex';
+import format from 'date-fns/format'
+import {mapState, mapActions} from 'vuex'
+
+import {dehumanize} from '@/helpers/time'
+import Card from '@/components/Card.vue'
+import FieldText from '@/components/form/FieldText.vue'
+import FieldLongText from '@/components/form/FieldLongText.vue'
+import FieldDateTime from '@/components/form/FieldDateTime.vue'
 
 
 export default {
@@ -115,6 +117,24 @@ export default {
       this.needEndDate = !this.needEndDate;
       if (this.needEndDate == false) {
         this.newTask.endDate = null;
+      }
+    },
+    checkDuration(d) {
+      const v = dehumanize(d)
+      if (isNaN(v))
+        return {
+          isValid: false,
+          message: "Does not recognize time format"
+        }
+      if (v > 8*60*60)
+        return {
+          isValid: false,
+          message: "Max duration is 8 hours"
+        }
+
+      return {
+        isValid: true,
+        message: ""
       }
     }
   }
