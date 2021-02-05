@@ -5,7 +5,7 @@
       <input
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
-        class="input is-rounded" type="text" :placeholder="hint">
+        class="input" :class='{"is-rounded": isRounded}' type="text" :placeholder="hint">
     </div>
   </div>
 </template>
@@ -29,6 +29,11 @@ export default {
       type: String,
       require: true,
       default: ''
+    },
+    isRounded:  {
+      type: Boolean,
+      require: false,
+      default: false
     }
   }
 }

@@ -13,7 +13,7 @@
         <div class="column is-one-thirds">
           <form @submit.prevent="onSubmit">
           <FieldEmail v-model="form.email"></FieldEmail>
-          <FieldText v-model="form.name" label="Your name"></FieldText>
+          <FieldText v-model="form.name" label="Your name" :isRounded="true"></FieldText>
           <FieldPassword v-model="form.password" :withConfirmation="true"></FieldPassword>
           <div class="field">
             <p class="control">
