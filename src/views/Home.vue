@@ -4,7 +4,7 @@
       <div class="columns">
         <div class="column is-two-thirds" id="intro">
           <div class="container">
-            <img alt="Vue logo" src="@/assets/hitarget-logo.png" width="260">
+            <img alt="Vue logo" src="images/hitarget-logo.png" width="260">
           </div>
           <div class="container">
             <h1 class="title">
@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     ...mapActions('User', ['loginUser']),
-    onSubmit() {      
+    onSubmit() {
       this.loginUser(this.user).then(()=>{
         if (this.currentUser) {
           this.$router.push({name:'PageTodo'});
