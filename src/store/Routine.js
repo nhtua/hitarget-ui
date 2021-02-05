@@ -23,10 +23,7 @@ export const RoutineStoreModule = {
       const result = await axios.get(rootState.Config.data.API_HOST+'/routine', jwtHeader(rootState.User.token))
       const data = result.data.map(item=>{
         if (item.end_date) {
-          item.endDate = new Date(item.end_date+" 00:00:00")
-          delete item.end_date
-        } else {
-          item.endDate = null
+          item.end_date = new Date(item.end_date+" 23:59:59")
         }
         return item
       })
@@ -46,7 +43,9 @@ export const RoutineStoreModule = {
       const result = await axios.put(rootState.Config.data.API_HOST+'/routine/checkpoint',
         checkpoint,
         jwtHeader(rootState.User.token))
-      commit('replaceTask', result.data)
+      const task = result.data
+      task['end_date'] = task['end_date'] ?new Date(task.end_date+' 23:59:59') :null
+      commit('replaceTask', task)
     }
   }
 }

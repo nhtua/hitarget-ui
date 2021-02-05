@@ -13,9 +13,9 @@
       <div class="media-content">
         <div class="content">
           <p>
-            <strong>{{summary}}</strong> <small v-if="endDate">End of {{deadline}}</small>
+            <strong>{{routine.summary}}</strong> <small v-if="routine.end_date">End of {{deadline}}</small>
             <br>
-            {{note}}
+            {{routine.note}}
           </p>
         </div>
       </div>
@@ -32,25 +32,7 @@ import {mapActions} from 'vuex'
 export default {
   name: "TodoCard",
   props: {
-    cardId: {
-      type: String,
-      require: true
-    },
-    summary: {
-      type: String,
-      require: true,
-      default: ''
-    },
-    note: {
-      type: String,
-      require: false,
-      default: ''
-    },
-    endDate: {
-      type: Date,
-      require: false,
-      default: null
-    }
+    routine: Object
   },
   data() {
     return {
@@ -61,20 +43,20 @@ export default {
   },
   computed: {
     deadline() {
-      if (!this.endDate )
-        return null;
-      return format(this.endDate, 'MMM d');
+      if (!this.routine.end_date)
+        return null
+      return format(this.routine.end_date, 'MMM d')
     },
     isCompleted() {
-      if (this.percent>=100) return 'is-completed';
-      return '';
+      if (this.percent>=100) return 'is-completed'
+      return ''
     }
   },
   methods: {
     ...mapActions('Routine', ['addCheckpoint']),
     toggleControl() {
       this.isRunning = !this.isRunning
-      this.addCheckpoint({routine_id: this.cardId, is_running: this.isRunning})
+      this.addCheckpoint({routine_id: this.routine.id, is_running: this.isRunning})
     },
     colorStatus() {
       let cssClass = ""
