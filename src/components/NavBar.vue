@@ -3,7 +3,7 @@
     <div class="navbar-brand">
       <span  @click.stop="hitBurger=false">
         <router-link to="/" class="navbar-item">
-          <img src="@/assets/hitarget-logo-small.png" height="28">
+          <img src="images/hitarget-logo-small.png" height="28">
         </router-link>
       </span>
 

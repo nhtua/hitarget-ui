@@ -6,8 +6,7 @@ export const UserStoreModule = {
   namespaced: true,
   state: {
     currentUser: null,
-    token: null,
-    errorMsgs: []
+    token: null
   },
   mutations: {
     setCurrentUser(state, user) {
@@ -15,9 +14,6 @@ export const UserStoreModule = {
     },
     setCurrentToken(state, token) {
       state.token = token
-    },
-    setErrorMsgs(state, errors) {
-      state.errorMsgs = errors
     }
   },
   actions: {
@@ -43,16 +39,6 @@ export const UserStoreModule = {
       dispatch('setToken', '')
       commit('setCurrentToken', null)
       commit('setCurrentUser', null)
-    },
-    async register({commit, rootState}, form) {
-      try {
-        await axios.post(rootState.Config.data.API_HOST+"/users/register", form)      
-      } catch (err) {
-        commit('setErrorMsgs', err.response.data.errors)
-      }
-    },
-    async clearErrors({commit}) {
-      commit('setErrorMsgs', [])
     }
   }
 }
