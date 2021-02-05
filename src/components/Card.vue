@@ -3,7 +3,7 @@
     <article class="media">
       <div class="media-left"  @mouseover="showControl=true" @mouseleave="showControl=false">
         <figure class="image is-64x64">
-          <div  class="progress-clock is-64x64" :class="isCompleted" v-show="!showControl"><span>{{percent}}%</span></div>
+          <div  class="progress-clock is-64x64" :class="isCompleted" v-show="!showControl"><span>{{percentage}}%</span></div>
           <div class="progress-control" :class="isCompleted" v-show="showControl" @click.stop="toggleControl">
             <span v-show="!isRunning"><i class="fas fa-running"></i></span>
             <span v-show="isRunning"><i class="fas fa-hand-paper"></i></span>
@@ -20,7 +20,7 @@
         </div>
       </div>
     </article>
-    <div class="progress-bar" :class="colorStatus()" :style='{"width": percent+"%"}'>
+    <div class="progress-bar" :class="colorStatus()" :style='{"width": percentage+"%"}'>
     </div>
   </div>
 </template>
@@ -38,17 +38,20 @@ export default {
     return {
       isRunning: false,
       showControl: false,
-      percent: 30,
     }
   },
   computed: {
+    percentage() {
+      const cp = this.getCurrentCheckpoint()
+      return cp == null ?0 :cp.percentage
+    },
     deadline() {
       if (!this.routine.end_date)
         return null
       return format(this.routine.end_date, 'MMM d')
     },
     isCompleted() {
-      if (this.percent>=100) return 'is-completed'
+      if (this.percentage>=100) return 'is-completed'
       return ''
     }
   },
@@ -67,6 +70,15 @@ export default {
         cssClass += "is-running "
       }
       return cssClass
+    },
+    getCurrentCheckpoint() {
+      const today = format(new Date(), 'yyyy-MM-dd')
+      const result = this.routine.repeat.map((v)=>{
+        if (today == v.date) return v
+      })
+      if (result.length > 0)
+        return result[0]
+      return null
     }
   }
 }
