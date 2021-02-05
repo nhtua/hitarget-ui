@@ -38,12 +38,15 @@ export default {
     return {
       isRunning: false,
       showControl: false,
+      intervalJob: null
     }
   },
   computed: {
     percentage() {
-      const cp = this.getCurrentCheckpoint()
-      return cp == null ?0 :cp.percentage
+      let cp = this.getCurrentCheckpoint()
+      cp = cp == null ?0 :cp.percentage
+      cp = cp >= 100 ?100 : cp
+      return parseFloat(cp.toFixed(1))
     },
     deadline() {
       if (!this.routine.end_date)
@@ -60,6 +63,18 @@ export default {
     toggleControl() {
       this.isRunning = !this.isRunning
       this.addCheckpoint({routine_id: this.routine.id, is_running: this.isRunning})
+      if (this.intervalJob != null) {
+        clearInterval(this.intervalJob)
+      }
+      if (this.isRunning) {
+        this.intervalJob = setInterval(()=>{
+          if (this.percentage >= 100) {
+            this.addCheckpoint({routine_id: this.routine.id, is_running: true})
+          } else {
+            clearInterval(this.intervalJob)
+          }
+        }, 10000)
+      }
     },
     colorStatus() {
       let cssClass = ""
