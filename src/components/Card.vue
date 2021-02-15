@@ -48,9 +48,9 @@ export default {
     const checkpoint = getCurrentCheckpoint(this.routine)
     if (checkpoint) {
       this.clock = checkpoint.gain
-      if (checkpoint.is_running) {
-        this.isRunning = false
-        this.toggleControl()
+      this.isRunning = checkpoint.is_running
+      if (this.isRunning) {
+        this.startClock()
       }
     }
 
@@ -84,18 +84,24 @@ export default {
         clearInterval(this.intervalClock)
       }
       if (this.isRunning) {
-        this.intervalClock = setInterval(()=>{
-          this.clock+=1
-          if (this.clock % 30 == 0) {
-            if (this.percentage < 100) {
-              this.addCheckpoint({routine_id: this.routine.id, is_running: true})
-            } else {
-              this.addCheckpoint({routine_id: this.routine.id, is_running: false})
-              clearInterval(this.intervalClock)
-            }
-          }
-        },1000)
+        this.startClock()
       }
+    },
+    startClock() {
+      this.intervalClock = setInterval(()=>{
+        this.clock+=1
+        if (this.clock % 30 == 0) {
+          if (this.percentage < 100) {
+            this.addCheckpoint({routine_id: this.routine.id, is_running: true})
+          } else {
+            this.addCheckpoint({routine_id: this.routine.id, is_running: false})
+          }
+        }
+        if (this.clock >= this.routine.duration) {
+          clearInterval(this.intervalClock)
+          this.isRunning = false
+        }
+      },1000)
     },
     colorStatus() {
       let cssClass = ""
