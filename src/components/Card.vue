@@ -57,9 +57,7 @@ export default {
   },
   computed: {
     gain() {
-      const cp = getCurrentCheckpoint(this.routine)
-      let gain = cp === null ?0 :cp.gain
-      return seconds2string(gain+this.clock)
+      return seconds2string(this.clock)
     },
     percentage() {
       let percent = (this.clock / this.routine.duration)*100
