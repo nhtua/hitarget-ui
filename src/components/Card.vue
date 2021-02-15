@@ -153,7 +153,7 @@ export default {
   @keyframes backgroundAmbientPallete {
     @for $i from 0 through 10 {
       #{$i*10}% {
-        background: radial-gradient(circle at $i*10%, $soil-lighter, $soil-fire);
+        background: radial-gradient(circle at $i*20%, $soil-lighter, $soil-fire);
       }
     }
   }
@@ -161,7 +161,7 @@ export default {
     animation-name: backgroundAmbientPallete;
     animation-duration: 1200ms;
     animation-iteration-count: infinite;
-    animation-direction: alternate;
+    animation-direction: normal;
   }
 
 </style>
