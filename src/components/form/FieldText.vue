@@ -65,11 +65,4 @@ export default {
 </script>
 
 <style lang="css" scoped>
-  .show-max-length {
-    position: absolute;
-    right: 5px;
-    top: 10px;
-    font-size: 0.8em;
-    color: gray;
-  }
 </style>
