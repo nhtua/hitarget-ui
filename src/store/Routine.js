@@ -11,6 +11,11 @@ export const RoutineStoreModule = {
   mutations: {
     setTodoList(state, todoList) {
       state.todoList = todoList
+    },
+    replaceTask(state, task) {
+      state.todoList.forEach((v,i)=>{
+        if (v.id == task.id) state.todoList[i] = task
+      })
     }
   },
   actions: {
@@ -18,10 +23,7 @@ export const RoutineStoreModule = {
       const result = await axios.get(rootState.Config.data.API_HOST+'/routine', jwtHeader(rootState.User.token))
       const data = result.data.map(item=>{
         if (item.end_date) {
-          item.endDate = new Date(item.end_date+" 00:00:00")
-          delete item.end_date
-        } else {
-          item.endDate = null
+          item.end_date = new Date(item.end_date+" 23:59:59")
         }
         return item
       })
@@ -36,6 +38,14 @@ export const RoutineStoreModule = {
       data.duration = dehumanize(d)
       const result = await axios.post(rootState.Config.data.API_HOST+'/routine', data, jwtHeader(rootState.User.token))
       commit('setTodoList', [result.data, ...state.todoList])
+    },
+    async addCheckpoint( {commit, rootState}, checkpoint) {
+      const result = await axios.put(rootState.Config.data.API_HOST+'/routine/checkpoint',
+        checkpoint,
+        jwtHeader(rootState.User.token))
+      const task = result.data
+      task['end_date'] = task['end_date'] ?new Date(task.end_date+' 23:59:59') :null
+      commit('replaceTask', task)
     }
   }
 }

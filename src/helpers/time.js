@@ -22,3 +22,7 @@ export function dehumanize(d) {
   }
   return total*1/1000
 }
+
+export function seconds2string(sec) {
+  return ms(sec*1000)
+}

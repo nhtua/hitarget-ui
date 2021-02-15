@@ -36,10 +36,7 @@
       <div class="columns is-1-mobile is-2-tablet is-3-desktop">
         <div class="column is-four-fifths">
           <Card
-            :summary="task.summary"
-            :note="task.note"
-            :endDate="task.endDate || null"
-            :duration="task.duration"
+            :routine="task"
             v-for="task in todoList" :key="task.id"/>
         </div>
         <div class="column is-one-fifths" v-if="tags.length > 0">
@@ -62,6 +59,7 @@ import FieldText from '@/components/form/FieldText.vue'
 import FieldLongText from '@/components/form/FieldLongText.vue'
 import FieldDateTime from '@/components/form/FieldDateTime.vue'
 
+import {getCurrentCheckpoint} from '@/helpers/checkpoint'
 
 export default {
   name: "PageTodo",
@@ -89,7 +87,10 @@ export default {
       return format(new Date(), 'MMM d');
     },
     inProgressCount() {
-      return this.todoList.length;
+      return this.todoList.filter((x)=>{
+        const cp = getCurrentCheckpoint(x)
+        return cp === null || cp.percentage < 100
+      }).length;
     }
   },
   watch: {
