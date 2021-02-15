@@ -5,8 +5,9 @@
       <input
         :value="modelValue"
         @keyup="onChanged"
-        class="input" :class='{"is-rounded": isRounded}' type="text" :placeholder="hint">
+        class="input" :class='{"is-rounded": isRounded}' type="text" :placeholder="hint" :maxlength="!isNaN(max)?max:''" >
       <p class="help is-danger" v-if="!isValid">{{msg}}</p>
+      <span class="show-max-length" v-if="!isNaN(max)">{{modelValue.length}}/{{max}}</span>
     </div>
   </div>
 </template>
@@ -40,6 +41,10 @@ export default {
       type: Function,
       require: false,
       default: ()=>{return {isValid: true, message:""}}
+    },
+    max: {
+      type: Number,
+      require: false
     }
   },
   data() {
@@ -60,4 +65,11 @@ export default {
 </script>
 
 <style lang="css" scoped>
+  .show-max-length {
+    position: absolute;
+    right: 5px;
+    top: 10px;
+    font-size: 0.8em;
+    color: gray;
+  }
 </style>
