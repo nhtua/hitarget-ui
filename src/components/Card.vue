@@ -4,7 +4,7 @@
     <article class="media">
       <div class="media-left"  @mouseover="showControl=true" @mouseleave="showControl=false">
         <figure class="image is-64x64">
-          <div  class="progress-clock is-64x64" :class="isCompleted" v-show="!showControl"><span>{{percentage}}%</span></div>
+          <div  class="progress-clock is-64x64" :class="isCompleted" v-show="!showControl"><span>{{gain}}</span></div>
           <div class="progress-control" :class="isCompleted" v-show="showControl" @click.stop="toggleControl">
             <span v-show="!isRunning"><i class="fas fa-running"></i></span>
             <span v-show="isRunning"><i class="fas fa-hand-paper"></i></span>
@@ -29,6 +29,7 @@ import format from 'date-fns/format'
 import {mapActions} from 'vuex'
 
 import {getCurrentCheckpoint} from '@/helpers/checkpoint'
+import {seconds2string} from '@/helpers/time'
 
 export default {
   name: "TodoCard",
@@ -39,17 +40,27 @@ export default {
     return {
       isRunning: false,
       showControl: false,
-      intervalJob: null
+      clock: 0,
+      intervalClock: null
     }
   },
   mounted() {
     const checkpoint = getCurrentCheckpoint(this.routine)
-    if (checkpoint && checkpoint.is_running) {
-      this.isRunning = false
-      this.toggleControl()
+    if (checkpoint) {
+      this.clock = checkpoint.gain      
+      if (checkpoint.is_running) {
+        this.isRunning = false
+        this.toggleControl()
+      }
     }
+
   },
   computed: {
+    gain() {
+      const cp = getCurrentCheckpoint(this.routine)
+      let gain = cp === null ?0 :cp.gain
+      return seconds2string(gain+this.clock)
+    },
     percentage() {
       const cp = getCurrentCheckpoint(this.routine)
       let percent = cp == null ?0 :cp.percentage
@@ -71,18 +82,21 @@ export default {
     toggleControl() {
       this.isRunning = !this.isRunning
       this.addCheckpoint({routine_id: this.routine.id, is_running: this.isRunning})
-      if (this.intervalJob != null) {
-        clearInterval(this.intervalJob)
+      if (this.intervalClock != null) {
+        clearInterval(this.intervalClock)
       }
       if (this.isRunning) {
-        this.intervalJob = setInterval(()=>{
-          if (this.percentage < 100) {
-            this.addCheckpoint({routine_id: this.routine.id, is_running: true})
-          } else {
-            this.addCheckpoint({routine_id: this.routine.id, is_running: false})
-            clearInterval(this.intervalJob)
+        this.intervalClock = setInterval(()=>{
+          this.clock+=1
+          if (this.clock % 30 == 0) {
+            if (this.percentage < 100) {
+              this.addCheckpoint({routine_id: this.routine.id, is_running: true})
+            } else {
+              this.addCheckpoint({routine_id: this.routine.id, is_running: false})
+              clearInterval(this.intervalClock)
+            }
           }
-        }, 10000)
+        },1000)
       }
     },
     colorStatus() {
