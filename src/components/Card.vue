@@ -1,7 +1,7 @@
 <template>
-  <div class="box">
+  <div class="box" :style='{"height": (autoCardHeight+40)+"px"}'>
     <div class="progress-bar" :class="colorStatus()" :style='{"width": percentage+"%"}'></div>
-    <article class="media">
+    <article class="media" ref="infoBox">
       <div class="media-left"  @mouseover="showControl=true" @mouseleave="showControl=false">
         <figure class="image is-64x64">
           <div  class="progress-clock is-64x64" :class="isCompleted" v-show="!showControl"><span>{{clockDisplay}}</span></div>
@@ -41,7 +41,8 @@ export default {
       isRunning: false,
       showControl: false,
       clock: 0,
-      intervalClock: null
+      intervalClock: null,
+      autoCardHeight: 100,
     }
   },
   mounted() {
@@ -53,7 +54,7 @@ export default {
         this.startClock()
       }
     }
-
+    this.matchHeight()
   },
   computed: {
     clockDisplay() {
@@ -73,7 +74,7 @@ export default {
     isCompleted() {
       if (this.percentage>=100) return 'is-completed'
       return ''
-    }
+    }    
   },
   methods: {
     ...mapActions('Routine', ['addCheckpoint']),
@@ -112,6 +113,9 @@ export default {
         cssClass += "is-running "
       }
       return cssClass
+    },
+    matchHeight() {
+      this.autoCardHeight = this.$refs.infoBox.clientHeight
     }
   }
 }
