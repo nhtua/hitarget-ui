@@ -28,6 +28,8 @@
 import format from 'date-fns/format'
 import {mapActions} from 'vuex'
 
+import {getCurrentCheckpoint} from '@/helpers/checkpoint'
+
 export default {
   name: "TodoCard",
   props: {
@@ -41,7 +43,7 @@ export default {
     }
   },
   mounted() {
-    const checkpoint = this.getCurrentCheckpoint()
+    const checkpoint = getCurrentCheckpoint(this.routine)
     if (checkpoint && checkpoint.is_running) {
       this.isRunning = false
       this.toggleControl()
@@ -49,10 +51,10 @@ export default {
   },
   computed: {
     percentage() {
-      let cp = this.getCurrentCheckpoint()
-      cp = cp == null ?0 :cp.percentage
-      cp = cp >= 100 ?100 : cp
-      return parseFloat(cp.toFixed(1))
+      const cp = getCurrentCheckpoint(this.routine)
+      let percent = cp == null ?0 :cp.percentage
+      percent = percent >= 100 ?100 : percent
+      return parseFloat(percent.toFixed(1))
     },
     deadline() {
       if (!this.routine.end_date)
@@ -92,15 +94,6 @@ export default {
         cssClass += "is-running "
       }
       return cssClass
-    },
-    getCurrentCheckpoint() {
-      const today = format(new Date(), 'yyyy-MM-dd')
-      const result = this.routine.repeat.map((v)=>{
-        if (today == v.date) return v
-      })
-      if (result.length > 0)
-        return result[0]
-      return null
     }
   }
 }

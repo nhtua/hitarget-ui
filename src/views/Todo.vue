@@ -59,6 +59,7 @@ import FieldText from '@/components/form/FieldText.vue'
 import FieldLongText from '@/components/form/FieldLongText.vue'
 import FieldDateTime from '@/components/form/FieldDateTime.vue'
 
+import {getCurrentCheckpoint} from '@/helpers/checkpoint'
 
 export default {
   name: "PageTodo",
@@ -86,7 +87,10 @@ export default {
       return format(new Date(), 'MMM d');
     },
     inProgressCount() {
-      return this.todoList.length;
+      return this.todoList.filter((x)=>{
+        const cp = getCurrentCheckpoint(x)
+        return cp === null || cp.percentage < 100
+      }).length;
     }
   },
   watch: {
