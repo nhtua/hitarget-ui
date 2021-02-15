@@ -4,10 +4,10 @@
     <article class="media">
       <div class="media-left"  @mouseover="showControl=true" @mouseleave="showControl=false">
         <figure class="image is-64x64">
-          <div  class="progress-clock is-64x64" :class="isCompleted" v-show="!showControl"><span>{{gain}}</span></div>
+          <div  class="progress-clock is-64x64" :class="isCompleted" v-show="!showControl"><span>{{clockDisplay}}</span></div>
           <div class="progress-control" :class="isCompleted" v-show="showControl" @click.stop="toggleControl">
-            <span v-show="!isRunning"><i class="fas fa-running"></i></span>
-            <span v-show="isRunning"><i class="fas fa-hand-paper"></i></span>
+            <span v-show="!isRunning"><i class="fas fa-play"></i></span>
+            <span v-show="isRunning"><i class="fas fa-pause"></i></span>
           </div>
         </figure>
       </div>
@@ -56,7 +56,9 @@ export default {
 
   },
   computed: {
-    gain() {
+    clockDisplay() {
+      if (this.clock % 10 == 0)
+        return this.percentage+"%"
       return seconds2string(this.clock)
     },
     percentage() {
@@ -116,6 +118,11 @@ export default {
     min-height: 100px;
     &:hover {
       background: $soil-lighter;
+      transition: linear 250ms background;
+    }
+    &:hover .progress-clock,
+    &:hover .progress-control {
+      background: $soil-lightest;
       transition: linear 250ms background;
     }
     .media {
