@@ -1,5 +1,6 @@
 <template>
   <div class="box">
+    <div class="progress-bar" :class="colorStatus()" :style='{"width": percentage+"%"}'></div>
     <article class="media">
       <div class="media-left"  @mouseover="showControl=true" @mouseleave="showControl=false">
         <figure class="image is-64x64">
@@ -20,8 +21,6 @@
         </div>
       </div>
     </article>
-    <div class="progress-bar" :class="colorStatus()" :style='{"width": percentage+"%"}'>
-    </div>
   </div>
 </template>
 
@@ -111,9 +110,13 @@ export default {
   .box {
     background: $soil-lightest;
     position: relative;
+    min-height: 100px;
     &:hover {
       background: $soil-lighter;
       transition: linear 250ms background;
+    }
+    .media {
+      position: absolute;
     }
   }
   .progress-clock, .progress-control  {
@@ -123,10 +126,10 @@ export default {
     line-height: 64px;
     text-align: center;
     border-radius: 50%;
-    background: $soil-fire;
+    background:$soil-lighter;
     font-size: 24px;
     &.is-completed {
-      background: $nickel-sulphate;
+      background: $copper-sulphate;
     }
   }
   .progress-bar {
@@ -134,14 +137,15 @@ export default {
     bottom: 0px;
     left: 0px;
     width: 100%;
-    height: 6px;
+    height: 100%;
     background: $soil-fire;
-    border-radius: 0px 0px 0px 6px;
+    border-radius: 6px;
     transition: linear 400ms all;
     &.is-completed {
       background: $nickel-sulphate;
-      border-radius: 0px 0px 6px 6px;
+      border-radius: 6px;
     }
+    z-index: 0;
   }
   @keyframes backgroundAmbientPallete {
     @for $i from 0 through 10 {
