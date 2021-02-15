@@ -47,7 +47,7 @@ export default {
   mounted() {
     const checkpoint = getCurrentCheckpoint(this.routine)
     if (checkpoint) {
-      this.clock = checkpoint.gain      
+      this.clock = checkpoint.gain
       if (checkpoint.is_running) {
         this.isRunning = false
         this.toggleControl()
@@ -62,9 +62,7 @@ export default {
       return seconds2string(gain+this.clock)
     },
     percentage() {
-      const cp = getCurrentCheckpoint(this.routine)
-      let percent = cp == null ?0 :cp.percentage
-      percent = percent >= 100 ?100 : percent
+      let percent = (this.clock / this.routine.duration)*100
       return parseFloat(percent.toFixed(1))
     },
     deadline() {
