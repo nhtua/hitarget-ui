@@ -9,8 +9,8 @@
     </div>
     <div v-if="isOpenForm" class="container inner-section" name="NewTaskForm">
       <form @submit.prevent="onSubmit">
-        <FieldText v-model="newTask.summary" hint="summary"/>
-        <FieldLongText v-model="newTask.note" hint="note"/>
+        <FieldText v-model="newTask.summary" hint="summary" :max="92" />
+        <FieldLongText v-model="newTask.note" hint="note" :max="499" />
         <FieldText v-model="newTask.duration" :validator="checkDuration" hint="hours each day? 2 hours 30 mins"/>
         <div class="field">
           <button @click.prevent="toggleEndDate" class="button is-light is-small" v-if="!needEndDate"><span class="fas fa-plus"></span> <span>repeat every day until?</span></button>

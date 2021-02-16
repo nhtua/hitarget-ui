@@ -4,7 +4,9 @@
       <textarea
         :value="modelValue"
         @input="$emit('update:modelValue',$event.target.value)"
-        class="textarea" :placeholder="hint"></textarea>
+        class="textarea" :placeholder="hint" 
+        :maxlength="!isNaN(max)?max:''"></textarea>
+      <span class="show-max-length" v-if="!isNaN(max)">{{modelValue.length}}/{{max}}</span>
     </div>
   </div>
 </template>
@@ -23,6 +25,10 @@ export default {
       type: String,
       require: true,
       default: ''
+    },
+    max: {
+      type: Number,
+      require: false
     }
   }
 }
