@@ -17,3 +17,14 @@ body {
 a image {
   border: 0;
 }
+
+div.global-padding {
+  padding: 0px 10px;
+}
+.show-max-length {
+  position: absolute;
+  right: 5px;
+  bottom: 10px;
+  font-size: 0.8em;
+  color: gray;
+}
