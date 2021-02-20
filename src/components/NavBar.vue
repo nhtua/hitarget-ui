@@ -24,9 +24,9 @@
           About
         </router-link>
 
-        <router-link :to="{name: 'SupportMe'}" class="navbar-item">
+        <a class="navbar-item" :href="contactLink" target="_blank">
           Support
-        </router-link>
+        </a>
       </div>
 
       <div class="navbar-end">
@@ -49,8 +49,9 @@
             Log-out
           </a>
           <hr class="navbar-divider">
-          <a class="navbar-item">
-            Report an issue
+          <a class="navbar-item" :href="contactLink" target="_blank">
+            <i class="fas fa-lightbulb"></i>
+            <span>Report issues</span>
           </a>
         </div>
       </div>
@@ -79,6 +80,9 @@ import {mapActions} from 'vuex'
     computed: {
       currentUser() {
         return this.$store.state.User.currentUser
+      },
+      contactLink() {
+        return this.$store.state.Config.data.CONTACT_LINK
       }
     },
     methods: {
