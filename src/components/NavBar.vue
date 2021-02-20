@@ -35,7 +35,7 @@
           {{currentUser.name}}
         </a>
 
-        <div class="navbar-dropdown">
+        <div class="navbar-dropdown" v-if="currentUser">
           <router-link :to="{name: 'PageTodo'}" class="navbar-item">
             Todos
           </router-link>
