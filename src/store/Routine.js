@@ -37,7 +37,11 @@ export const RoutineStoreModule = {
       let d = data.duration.toLowerCase()
       data.duration = dehumanize(d)
       const result = await axios.post(rootState.Config.data.API_HOST+'/routine', data, jwtHeader(rootState.User.token))
-      commit('setTodoList', [result.data, ...state.todoList])
+      const item = result.data
+      if (item.end_date) {
+        item.end_date = new Date(item.end_date+" 23:59:59")
+      }
+      commit('setTodoList', [item, ...state.todoList])
     },
     async addCheckpoint( {commit, rootState}, checkpoint) {
       const result = await axios.put(rootState.Config.data.API_HOST+'/routine/checkpoint',
