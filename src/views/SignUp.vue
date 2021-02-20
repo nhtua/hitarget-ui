@@ -80,7 +80,7 @@ export default {
       try {
         const res = await axios.post(host+"/users/register", this.form)
         this.modalTitle = 'Yooo! just one more step...'
-        this.messages = [`New account created. Please check your inbox ${res.data.email} `]
+        this.messages = [`New account created. You can login by ${res.data.email} now!`]
       } catch (err) {
         this.modalTitle = 'Oops!'
         this.messages =  err.response.data.errors
