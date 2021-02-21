@@ -54,7 +54,7 @@
               <span>Report issues</span>
             </a>
           </div>
-        </div>        
+        </div>
       </div>
     </div>
   </nav>
@@ -83,3 +83,10 @@ import {mapActions} from 'vuex'
     }
   }
 </script>
+
+<style scoped>
+  .navbar-end .navbar-dropdown {
+    left: auto;
+    right: 0;
+  }
+</style>
