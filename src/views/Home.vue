@@ -24,6 +24,10 @@
                 <button class="button is-primary">
                   Login
                 </button>
+
+                <router-link :to="{name:'SignUp'}" class="button is-warning">
+                  <strong>Sign up</strong>
+                </router-link>
               </p>
             </div>
           </form>
@@ -69,5 +73,8 @@ export default {
 <style scoped>
   #intro {
     text-align: center;
+  }
+  .field .control .button {
+    margin: 0 8px 0 0;
   }
 </style>

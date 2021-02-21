@@ -31,37 +31,30 @@
 
       <div class="navbar-end">
         <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" v-if="currentUser">
-          {{currentUser.name}}
-        </a>
+          <a class="navbar-link" v-if="currentUser">
+            {{currentUser.name}}
+          </a>
 
-        <div class="navbar-dropdown" v-if="currentUser">
-          <router-link :to="{name: 'PageTodo'}" class="navbar-item">
-            Todos
-          </router-link>
-          <a class="navbar-item">
-            Strikes
-          </a>
-          <a class="navbar-item">
-            Settings
-          </a>
-          <a class="navbar-item" @click="logout">
-            Log-out
-          </a>
-          <hr class="navbar-divider">
-          <a class="navbar-item" :href="contactLink" target="_blank">
-            <i class="fas fa-lightbulb"></i>
-            <span>Report issues</span>
-          </a>
-        </div>
-      </div>
-        <div class="navbar-item" v-if="!currentUser">
-          <div class="buttons">
-            <router-link :to="{name:'SignUp'}" class="button is-primary">
-              <strong>Sign up</strong>
+          <div class="navbar-dropdown" v-if="currentUser">
+            <router-link :to="{name: 'PageTodo'}" class="navbar-item">
+              Todos
             </router-link>
+            <a class="navbar-item">
+              Strikes
+            </a>
+            <a class="navbar-item">
+              Settings
+            </a>
+            <a class="navbar-item" @click="logout">
+              Log-out
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" :href="contactLink" target="_blank">
+              <i class="fas fa-lightbulb"></i>
+              <span>Report issues</span>
+            </a>
           </div>
-        </div>
+        </div>        
       </div>
     </div>
   </nav>
