@@ -30,6 +30,10 @@
                 </router-link>
               </p>
             </div>
+            <div class="field">
+              <span class="tag is-warning is-light">By logging in to hiTarget, you agree to</span>
+              <span class="tag is-warning is-light"><router-link :to="{name: 'PrivacyPolicy'}">Privacy Policy</router-link> and <router-link :to="{name: 'TermsOfService'}">Terms of service</router-link></span>
+            </div>
           </form>
         </div>
       </div>
@@ -76,5 +80,8 @@ export default {
   }
   .field .control .button {
     margin: 0 8px 0 0;
+  }
+  span.tag a {
+    padding: 0 6px;
   }
 </style>

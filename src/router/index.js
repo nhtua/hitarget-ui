@@ -30,6 +30,16 @@ const routes = [
       requiresLogin: true
     },
     component: () => import('../views/Todo.vue')
+  },
+  {
+    path: '/privacy-policy',
+    name: 'PrivacyPolicy',
+    component: () => import('../views/Static/PrivacyPolicy.vue')
+  },
+  {
+    path: '/terms-of-service',
+    name: 'TermsOfService',
+    component: () => import('../views/Static/Terms.vue')
   }
 ]
 
